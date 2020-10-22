@@ -1,0 +1,117 @@
+﻿<Window x:Class="EPOSNOW.View.LoginScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EPOSNOW.View"
+        mc:Ignorable="d"
+        WindowStyle="None" WindowState="Maximized"        
+        Title="LoginScreen"  Height="721" Width="1208.947">
+    <Window.Resources>
+        <Style TargetType="Label" x:Key="NumPad">
+            <Setter Property="Foreground" Value="{DynamicResource White}"/>
+            <Setter Property="Background" Value="{DynamicResource Orage}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource Gray}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="btn">
+            <Setter Property="Width" Value="92"/>
+            <Setter Property="Height" Value="64"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentControl>
+                            <Label x:Name="btnLbl" Style="{DynamicResource NumPad}">
+                                <ContentPresenter/>
+                            </Label>
+                        </ContentControl>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="btnLbl" Property="Background" Value="#FFC9623A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <SolidColorBrush x:Key="DarkBlue" Color="#FF0175A8"/>
+            <SolidColorBrush x:Key="Danger" Color="#FFD9534F"/>
+            <Style TargetType="Button" x:Key="btnDanger">
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                            x:Name="border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="4"
+                                            MaxHeight="{TemplateBinding MaxHeight}"
+                                            MaxWidth="{TemplateBinding MaxWidth}">
+                                <ContentPresenter
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background" Value="{DynamicResource Danger}"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Style.Triggers>
+                    <Trigger Property="Button.IsPressed" Value="True">
+                        <Setter Property="Background" Value="#FFC3524F"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource btnDanger}" x:Key="btnPrimery">
+                <Setter Property="Background" Value="#FF2E6DA4"/>
+            </Style>
+
+            <!--Button Info based on Button Danger-->
+            <Style TargetType="Button" BasedOn="{StaticResource btnDanger}" x:Key="btnInfo">
+                <Setter Property="Background" Value="#FF5BC0DE"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="95*"/>
+            <ColumnDefinition Width="Auto" MinWidth="445"/>
+            <ColumnDefinition Width="95*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="67"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Background="{DynamicResource DarkBlue}" Content="EPOS-NOW" Foreground="White" FontFamily="Raleway" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Grid.ColumnSpan="3"/>
+        <Label x:Name="label" Content="LOGIN" BorderBrush="White" BorderThickness="0 0 0 2" Foreground="{DynamicResource DarkBlue}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontWeight="SemiBold" FontFamily="Raleway" Grid.Row="1" VerticalAlignment="Top" Height="61" Margin="0,69,0,0" Grid.Column="1"/>
+        <Button Click="btnExit_Click" x:Name="btnExit" Content="Exit" Margin="0,261,148,0" Grid.Row="1" Width="126" Style="{DynamicResource btnDanger}" HorizontalAlignment="Right" Height="47" VerticalAlignment="Top" Grid.Column="1"/>
+        <Grid Height="42" Grid.Row="1" VerticalAlignment="Top" Margin="0,144,0,0" Grid.Column="1">
+            <TextBox Name="txtUser" Padding="40 7" FontSize="15" Foreground="Gray"/>
+            <Image Source="..\Assets\icons\man-user (1).png" Margin="10,0,0,0" HorizontalAlignment="Left" Width="31"/>
+        </Grid>
+        <Grid Height="42" Grid.Row="1" VerticalAlignment="Top" Margin="0,200,0,0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="59*"/>
+                <ColumnDefinition Width="163*"/>
+            </Grid.ColumnDefinitions>
+            <PasswordBox Name="txtPas" KeyUp="txtPas_KeyUp" Padding="40 7" FontSize="15" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,0,-0.2,0"/>
+            <Image Source="..\Assets\icons\lock.png" HorizontalAlignment="Left" Width="30" Margin="10,0,0,0"/>
+        </Grid>
+        <Button Content="Login" Click="btnLogin_Click" HorizontalAlignment="Right" Style="{DynamicResource btnPrimery}" Margin="0,261,5,0" Grid.Row="1" VerticalAlignment="Top" Width="126" Height="47" Grid.Column="1"/>
+    </Grid>
+</Window>
